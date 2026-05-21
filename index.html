@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Equity Research Pre-Assessment · Designed by Jatin Singh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue: #002FA7;
+    --blue-hover: #002480;
+    --blue-light: #E6EAFF;
+    --ink: #0A0A0A;
+    --sub: #52525B;
+    --muted: #A1A1AA;
+    --border: #E4E4E7;
+    --bg-alt: #F8F9FA;
+    --success: #10B981;
+    --success-bg: #ECFDF5;
+    --info: #3B82F6;
+    --info-bg: #EFF6FF;
+    --warning: #F59E0B;
+    --warning-bg: #FFFBEB;
+    --error: #EF4444;
+    --error-bg: #FEF2F2;
+  }
+  html, body {
+    background: #FFFFFF;
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+  body { display: flex; flex-direction: column; }
+  ::selection { background: var(--blue); color: #fff; }
+  .container { max-width: 960px; width: 100%; margin: 0 auto; padding: 0 16px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+  @media (min-width: 640px) { .container { padding: 0 24px; } }
+
+  /* header */
+  header.site { padding: 28px 0 12px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 30px; height: 30px; background: var(--blue); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+  .logo-mark span { font-family: "Cabinet Grotesk", sans-serif; color: #fff; font-weight: 800; font-size: 13px; }
+  .logo-text { font-family: "Cabinet Grotesk", sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; color: var(--ink); }
+  .meta-mono { font-family: "IBM Plex Mono", monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sub); }
+  @media (max-width: 540px) { header.site .meta-mono { display: none; } }
+
+  /* main */
+  main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 32px 0; animation: fadeUp .5s ease-out; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* landing */
+  .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; align-self: flex-start; margin-bottom: 14px; }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+  .pill span:last-child { font-family: "IBM Plex Mono", monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #3f3f46; }
+  h1.hero { font-family: "Cabinet Grotesk", sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; font-size: 40px; color: var(--ink); }
+  @media (min-width: 640px) { h1.hero { font-size: 56px; } }
+  @media (min-width: 1024px) { h1.hero { font-size: 64px; } }
+  h1.hero .accent { color: var(--blue); }
+  p.hero-sub { margin-top: 18px; max-width: 640px; font-size: 16px; line-height: 1.7; color: var(--sub); }
+  @media (min-width: 640px) { p.hero-sub { font-size: 18px; } }
+
+  .lvl-grid { margin-top: 34px; display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 640px) { .lvl-grid { grid-template-columns: repeat(3, 1fr); } }
+  .lvl-card { background: #fff; border: 1px solid var(--border); padding: 20px; border-radius: 14px; transition: transform .3s ease, border-color .3s ease; }
+  .lvl-card:hover { transform: translateY(-4px); border-color: var(--ink); }
+  .lvl-card-top { display: flex; align-items: center; justify-content: space-between; }
+  .lvl-card-num { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; }
+  .lvl-card-icon { width: 16px; height: 16px; color: var(--blue); }
+  .lvl-card h3 { margin-top: 14px; font-family: "Cabinet Grotesk", sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); }
+  .lvl-card p { margin-top: 6px; font-size: 14px; color: var(--sub); line-height: 1.6; }
+
+  .cta-row { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  @media (min-width: 640px) { .cta-row { flex-direction: row; align-items: center; } }
+  .btn { font-family: inherit; font-size: 15px; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; border: none; padding: 14px 26px; border-radius: 10px; display: inline-flex; align-items: center; gap: 10px; transition: background-color .2s ease, transform .2s ease, color .2s ease, border-color .2s ease; }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { background: var(--blue-hover); }
+  .btn-primary:disabled { background: #E4E4E7; color: var(--muted); cursor: not-allowed; }
+  .btn-secondary { background: #fff; color: var(--ink); border: 2px solid var(--ink); }
+  .btn-secondary:hover { background: var(--ink); color: #fff; }
+  .btn .arrow { transition: transform .2s ease; }
+  .btn:hover:not(:disabled) .arrow { transform: translateX(3px); }
+
+  /* quiz */
+  .quiz-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; flex-wrap: wrap; }
+  .quiz-head .left { display: flex; align-items: center; gap: 10px; }
+  .lbl-blue { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--blue); text-transform: uppercase; font-weight: 600; }
+  .lbl-gray { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--sub); text-transform: uppercase; }
+  .lbl-sep { width: 4px; height: 4px; background: #d4d4d8; border-radius: 50%; }
+  .progress { width: 100%; height: 6px; background: #f4f4f5; border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--blue); transition: width .5s ease; width: 0%; }
+  .card { margin-top: 28px; background: #fff; border: 1px solid var(--border); box-shadow: 0 8px 30px rgba(0,0,0,.04); padding: 24px; border-radius: 18px; }
+  @media (min-width: 640px) { .card { padding: 40px; } }
+  .question { font-family: "Cabinet Grotesk", sans-serif; font-size: 22px; font-weight: 600; color: var(--ink); line-height: 1.35; }
+  @media (min-width: 640px) { .question { font-size: 26px; } }
+  .question-note { margin-top: 8px; font-size: 14px; color: var(--muted); font-style: italic; }
+  .options { margin-top: 26px; display: grid; gap: 12px; }
+  .option { width: 100%; text-align: left; padding: 18px; border: 2px solid var(--border); background: #fff; border-radius: 12px; cursor: pointer; display: flex; align-items: flex-start; gap: 14px; transition: border-color .2s ease, background-color .2s ease; font-family: inherit; }
+  .option:hover { border-color: var(--ink); }
+  .option .radio { width: 20px; height: 20px; border: 2px solid #d4d4d8; border-radius: 50%; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: border-color .2s ease, background-color .2s ease; }
+  .option:hover .radio { border-color: var(--ink); }
+  .option .text { font-size: 15.5px; color: #27272a; line-height: 1.5; }
+  .option.selected { border-color: var(--blue); background: var(--blue-light); }
+  .option.selected .radio { border-color: var(--blue); background: var(--blue); }
+  .option.selected .radio::after { content: ""; width: 8px; height: 8px; background: #fff; border-radius: 50%; }
+  .option.selected .text { color: var(--ink); font-weight: 500; }
+  .quiz-foot { margin-top: 30px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .helper { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; }
+
+  /* level result */
+  .result-head { display: flex; align-items: center; gap: 8px; }
+  .result-head svg { color: var(--blue); }
+  .result-title { margin-top: 12px; font-family: "Cabinet Grotesk", sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+  @media (min-width: 640px) { .result-title { font-size: 38px; } }
+  .result-sub { margin-top: 6px; font-size: 15px; color: var(--sub); }
+  .result-grid { margin-top: 28px; display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .result-grid { grid-template-columns: 1fr 1fr; } }
+  .score-box { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+  .score-box .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--sub); text-transform: uppercase; }
+  .score-value { margin-top: 6px; font-family: "Cabinet Grotesk", sans-serif; font-size: 52px; font-weight: 800; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .score-value small { font-size: 22px; color: var(--muted); font-weight: 400; }
+  .score-bar { margin-top: 18px; width: 100%; height: 6px; background: #e4e4e7; border-radius: 999px; overflow: hidden; }
+  .score-bar > div { height: 100%; transition: width .7s ease; }
+  .band-box { border: 1px solid; border-radius: 14px; padding: 22px; }
+  .band-box .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: .85; }
+  .band-box .band-label { margin-top: 6px; font-family: "Cabinet Grotesk", sans-serif; font-size: 24px; font-weight: 800; line-height: 1.2; }
+  @media (min-width: 640px) { .band-box .band-label { font-size: 28px; } }
+  .band-box .band-range { margin-top: 10px; font-size: 14px; opacity: .9; }
+  .tone-success { background: var(--success-bg); border-color: #A7F3D0; color: #047857; }
+  .tone-success .bar { background: var(--success); }
+  .tone-info { background: var(--info-bg); border-color: #BFDBFE; color: #1D4ED8; }
+  .tone-info .bar { background: var(--info); }
+  .tone-warning { background: var(--warning-bg); border-color: #FDE68A; color: #92400E; }
+  .tone-warning .bar { background: var(--warning); }
+  .tone-error { background: var(--error-bg); border-color: #FECACA; color: #B91C1C; }
+  .tone-error .bar { background: var(--error); }
+  .result-cta { margin-top: 30px; display: flex; justify-content: flex-end; }
+
+  /* final */
+  .final-grid { margin-top: 22px; display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .final-grid { grid-template-columns: repeat(3, 1fr); } }
+  .final-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+  .final-card-top { display: flex; align-items: center; justify-content: space-between; }
+  .final-tag { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 8px; border: 1px solid; border-radius: 999px; }
+  .final-card h3 { margin-top: 12px; font-family: "Cabinet Grotesk", sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); }
+  .final-card .score { margin-top: 14px; font-family: "Cabinet Grotesk", sans-serif; font-size: 30px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .final-card .score small { font-size: 15px; color: var(--muted); font-weight: 400; }
+  .final-card .bar-track { margin-top: 12px; width: 100%; height: 6px; background: #f4f4f5; border-radius: 999px; overflow: hidden; }
+  .final-card .bar-track > div { height: 100%; transition: width .7s ease; }
+  .final-card .band-text { margin-top: 14px; font-size: 14px; font-weight: 500; }
+  .hero-result { background: #fff; border: 1px solid var(--border); box-shadow: 0 8px 30px rgba(0,0,0,.04); padding: 28px; border-radius: 18px; }
+  @media (min-width: 640px) { .hero-result { padding: 40px; } }
+  .hero-result-head { display: flex; align-items: center; gap: 8px; color: var(--blue); }
+  .hero-result-head .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; }
+  .hero-result-row { margin-top: 18px; display: flex; flex-direction: column; gap: 22px; }
+  @media (min-width: 640px) { .hero-result-row { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+  .overall-score { font-family: "Cabinet Grotesk", sans-serif; font-size: 72px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .overall-score small { font-size: 28px; color: var(--muted); font-weight: 400; }
+  .overall-band { margin-top: 16px; font-family: "Cabinet Grotesk", sans-serif; font-size: 28px; font-weight: 800; line-height: 1.2; }
+  @media (min-width: 640px) { .overall-band { font-size: 32px; } }
+  .overall-band-box { border: 1px solid; border-radius: 14px; padding: 20px; }
+  .overall-bar { margin-top: 28px; width: 100%; height: 8px; background: #f4f4f5; border-radius: 999px; overflow: hidden; }
+  .overall-bar > div { height: 100%; transition: width 1s ease; }
+  .final-foot { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; justify-content: space-between; }
+  @media (min-width: 640px) { .final-foot { flex-direction: row; align-items: center; } }
+  .final-foot p { font-size: 14px; color: var(--sub); max-width: 460px; line-height: 1.6; }
+
+  /* footer */
+  footer.site { margin-top: 48px; padding: 28px 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; sm:flex-row gap: 10px; align-items: center; justify-content: space-between; }
+  footer.site { flex-direction: column; gap: 10px; }
+  @media (min-width: 640px) { footer.site { flex-direction: row; } }
+  footer .credit { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--ink); text-transform: uppercase; }
+  footer .credit .name { color: var(--blue); font-weight: 600; }
+  footer .left { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--sub); text-transform: uppercase; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="site">
+    <div class="logo">
+      <div class="logo-mark"><span>ER</span></div>
+      <div class="logo-text">Equity Research</div>
+    </div>
+    <div class="meta-mono">Pre-Assessment v1.0</div>
+  </header>
+
+  <main id="app"></main>
+
+  <footer class="site">
+    <div class="left">Equity Research · Pre-Assessment</div>
+    <div class="credit">Designed by <span class="name">Jatin Singh</span></div>
+  </footer>
+</div>
+
+<script>
+/* =========================
+   QUESTION BANK
+   ========================= */
+const LEVELS = [
+  {
+    id: 1, key: "foundation",
+    title: "Foundation Ready",
+    subtitle: "Basic market awareness, finance curiosity & business understanding",
+    bands: [
+      { min: 6, max: 7, label: "Strong Foundation", tone: "success" },
+      { min: 4, max: 5, label: "Good Interest, Needs Guidance", tone: "info" },
+      { min: 2, max: 3, label: "Beginner Level", tone: "warning" },
+      { min: 0, max: 1, label: "Very Early Stage", tone: "error" },
+    ],
+    questions: [
+      { text: "Why do companies list on stock exchanges?", options: ["To raise money","To print money","To avoid taxes"], correct: [0] },
+      { text: "Which document shows company profit?", options: ["Balance Sheet","P&L Statement","GST Return"], correct: [1] },
+      { text: "What does IPO mean?", options: ["Initial Public Offering","Indian Profit Order","Internal Price Offer"], correct: [0] },
+      { text: "Which platform is mainly used for Indian stock investing?", options: ["Zerodha","Swiggy","Paytm Mall"], correct: [0] },
+      { text: "If profits increase consistently, stock price usually:", options: ["Falls","Stays zero","Increases over time"], correct: [2] },
+      { text: "Which sector interests you the most?", options: ["Banking","IT","FMCG","Pharma"], correct: [0,1,2,3], note: "Interest indicator — no wrong choice." },
+      { text: "How often do you follow market/business news?", options: ["Daily","Weekly","Rarely","Never"], correct: [0,1] },
+    ]
+  },
+  {
+    id: 2, key: "analyst",
+    title: "Analyst Ready",
+    subtitle: "Logical thinking, business sense, risk awareness & practical knowledge",
+    bands: [
+      { min: 6, max: 7, label: "Strong Analyst Potential", tone: "success" },
+      { min: 4, max: 5, label: "Trainable Candidate", tone: "info" },
+      { min: 2, max: 3, label: "Surface-Level Understanding", tone: "warning" },
+      { min: 0, max: 1, label: "Needs Fundamentals First", tone: "error" },
+    ],
+    questions: [
+      { text: "High debt is generally:", options: ["Good always","Risky","Tax free"], correct: [1] },
+      { text: "Which ratio is used for valuation?", options: ["P/E Ratio","BMI","GST Ratio"], correct: [0] },
+      { text: "If RBI increases interest rates, banking stocks may:", options: ["Never move","Get impacted","Shut down"], correct: [1] },
+      { text: "Which company has a stronger moat?", options: ["One local shop","Strong brand company","New unknown startup"], correct: [1] },
+      { text: "What matters most before buying a stock?", options: ["Telegram tips","Business quality","Reel views"], correct: [1] },
+      { text: "Which skill is most important in equity research?", options: ["Patience","Fast typing","Gaming"], correct: [0] },
+      { text: "Have you ever analyzed a company on your own?", options: ["Yes, deeply","Basic level","Only watched videos","Never tried"], correct: [0,1] },
+    ]
+  },
+  {
+    id: 3, key: "interview",
+    title: "Interview Ready",
+    subtitle: "Investment mindset, equity research thinking & interview readiness",
+    bands: [
+      { min: 6, max: 7, label: "Interview-Ready Mindset", tone: "success" },
+      { min: 4, max: 5, label: "Good Potential With Mentorship", tone: "info" },
+      { min: 2, max: 3, label: "Needs Better Analytical Thinking", tone: "warning" },
+      { min: 0, max: 1, label: "Not Ready Yet", tone: "error" },
+    ],
+    questions: [
+      { text: "Why do you want to enter equity research?", options: ["Serious finance career","Quick money","Time pass"], correct: [0] },
+      { text: "What do you check first before analyzing a company?", options: ["Business model","Stock tips","Instagram presence"], correct: [0] },
+      { text: "If a company's sales grow but profits fall, what will you do?", options: ["Ignore it","Analyze deeper","Buy immediately"], correct: [1] },
+      { text: "Which skill matters most in equity research?", options: ["Patience & analysis","Fast trading","Guesswork"], correct: [0] },
+      { text: "What makes a company a good long-term investment?", options: ["Strong fundamentals","Operator activity","Viral hype"], correct: [0] },
+      { text: "If your investment falls 20%, what should an analyst do?", options: ["Panic sell","Recheck thesis","Blame market"], correct: [1] },
+      { text: "Which approach suits equity research the most?", options: ["Data-backed decisions","Telegram tips","Random buying"], correct: [0] },
+    ]
+  }
+];
+
+const OVERALL_BANDS = [
+  { min: 18, max: 21, label: "High Potential Candidate", tone: "success" },
+  { min: 14, max: 17, label: "Strong Learner", tone: "info" },
+  { min: 9, max: 13, label: "Beginner With Interest", tone: "warning" },
+  { min: 0, max: 8, label: "Needs Complete Foundation Building", tone: "error" },
+];
+
+const TAGS = { success:"Strong", info:"Good", warning:"Developing", error:"Early" };
+
+/* =========================
+   STATE
+   ========================= */
+const state = {
+  stage: "landing", // landing | quiz | level-result | final-result
+  levelIdx: 0,
+  questionIdx: 0,
+  answers: LEVELS.map(l => Array(l.questions.length).fill(null)),
+  scores: [0,0,0],
+};
+
+function scoreLevel(level, ans) {
+  let s = 0;
+  level.questions.forEach((q,i) => { if (ans[i] != null && q.correct.includes(ans[i])) s++; });
+  return s;
+}
+function getBand(bands, score) { return bands.find(b => score >= b.min && score <= b.max) || bands[bands.length-1]; }
+function getOverallBand(t) { return getBand(OVERALL_BANDS, t); }
+
+/* =========================
+   ICONS (inline SVG)
+   ========================= */
+const ICONS = {
+  arrow: '<svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+  book: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+  chart: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>',
+  brief: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+  trophy: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0z"/></svg>',
+  award: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>',
+  restart: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 12 3 6 9 6"/><path d="M3 13a9 9 0 1 0 3-7.7L3 6"/></svg>',
+};
+
+/* =========================
+   RENDER
+   ========================= */
+const app = document.getElementById("app");
+
+function render() {
+  app.innerHTML = "";
+  if (state.stage === "landing") renderLanding();
+  else if (state.stage === "quiz") renderQuiz();
+  else if (state.stage === "level-result") renderLevelResult();
+  else if (state.stage === "final-result") renderFinalResult();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderLanding() {
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="pill"><span class="dot"></span><span>Pre-Assessment · 21 Questions</span></div>
+    <h1 class="hero">Are you ready for <span class="accent">Equity Research?</span></h1>
+    <p class="hero-sub">A focused 3-level evaluation designed to map your foundation, analytical thinking and interview readiness. Honest answers give honest insights — no timer, no judgment, just clarity.</p>
+    <div class="lvl-grid">
+      ${[
+        { n:"01", icon:ICONS.book, title:"Foundation Ready", desc:"Market awareness, business basics & finance curiosity." },
+        { n:"02", icon:ICONS.chart, title:"Analyst Ready", desc:"Logical thinking, risk awareness & practical understanding." },
+        { n:"03", icon:ICONS.brief, title:"Interview Ready", desc:"Equity research mindset & interview preparedness." },
+      ].map(l => `
+        <div class="lvl-card">
+          <div class="lvl-card-top"><div class="lvl-card-num">LVL ${l.n}</div>${l.icon}</div>
+          <h3>${l.title}</h3>
+          <p>${l.desc}</p>
+        </div>
+      `).join("")}
+    </div>
+    <div class="cta-row">
+      <button class="btn btn-primary" id="startBtn">Start Assessment ${ICONS.arrow}</button>
+      <span class="helper">~7 minutes · Untimed · Anonymous</span>
+    </div>
+  `;
+  app.appendChild(wrap);
+  document.getElementById("startBtn").addEventListener("click", () => {
+    state.stage = "quiz"; state.levelIdx = 0; state.questionIdx = 0; render();
+  });
+}
+
+function renderQuiz() {
+  const level = LEVELS[state.levelIdx];
+  const q = level.questions[state.questionIdx];
+  const total = level.questions.length;
+  const selected = state.answers[state.levelIdx][state.questionIdx];
+  const progress = ((state.questionIdx + (selected != null ? 1 : 0)) / total) * 100;
+  const isLast = state.questionIdx === total - 1;
+
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="quiz-head">
+      <div class="left">
+        <span class="lbl-blue">Level ${level.id} / 3</span>
+        <span class="lbl-sep"></span>
+        <span class="lbl-gray">${level.title}</span>
+      </div>
+      <span class="lbl-gray">Q ${state.questionIdx + 1} / ${total}</span>
+    </div>
+    <div class="progress"><div class="progress-fill" style="width:${progress}%"></div></div>
+    <div class="card">
+      <div class="question">${q.text}</div>
+      ${q.note ? `<div class="question-note">${q.note}</div>` : ""}
+      <div class="options">
+        ${q.options.map((opt, idx) => `
+          <button type="button" class="option${selected === idx ? " selected" : ""}" data-idx="${idx}">
+            <span class="radio"></span>
+            <span class="text">${opt}</span>
+          </button>
+        `).join("")}
+      </div>
+      <div class="quiz-foot">
+        <span class="helper">Select one option to continue</span>
+        <button class="btn btn-primary" id="nextBtn" ${selected == null ? "disabled" : ""}>
+          ${isLast ? "Submit Level" : "Next"} ${ICONS.arrow}
+        </button>
+      </div>
+    </div>
+  `;
+  app.appendChild(wrap);
+
+  wrap.querySelectorAll(".option").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.answers[state.levelIdx][state.questionIdx] = parseInt(btn.dataset.idx, 10);
+      render();
+    });
+  });
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    if (selected == null) return;
+    if (isLast) {
+      state.scores[state.levelIdx] = scoreLevel(level, state.answers[state.levelIdx]);
+      state.stage = "level-result";
+    } else {
+      state.questionIdx += 1;
+    }
+    render();
+  });
+}
+
+function renderLevelResult() {
+  const level = LEVELS[state.levelIdx];
+  const score = state.scores[state.levelIdx];
+  const total = level.questions.length;
+  const band = getBand(level.bands, score);
+  const pct = (score / total) * 100;
+  const isLast = state.levelIdx === LEVELS.length - 1;
+
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="card">
+      <div class="result-head">
+        <span class="lbl-blue">Level ${level.id} Complete</span>
+        ${ICONS.trophy}
+      </div>
+      <div class="result-title">${level.title}</div>
+      <div class="result-sub">${level.subtitle}</div>
+      <div class="result-grid">
+        <div class="score-box">
+          <div class="lbl">Your Score</div>
+          <div class="score-value">${score}<small> / ${total}</small></div>
+          <div class="score-bar"><div class="bar tone-${band.tone}" style="width:${pct}%; background:${getBarColor(band.tone)}"></div></div>
+        </div>
+        <div class="band-box tone-${band.tone}">
+          <div class="lbl">Assessment</div>
+          <div class="band-label">${band.label}</div>
+          <div class="band-range">Score band: ${band.min}–${band.max} correct</div>
+        </div>
+      </div>
+      <div class="result-cta">
+        <button class="btn btn-primary" id="continueBtn">${isLast ? "See Final Result" : "Continue to Level " + (level.id + 1)} ${ICONS.arrow}</button>
+      </div>
+    </div>
+  `;
+  app.appendChild(wrap);
+  document.getElementById("continueBtn").addEventListener("click", () => {
+    if (isLast) state.stage = "final-result";
+    else { state.levelIdx += 1; state.questionIdx = 0; state.stage = "quiz"; }
+    render();
+  });
+}
+
+function getBarColor(tone) {
+  return { success:"#10B981", info:"#3B82F6", warning:"#F59E0B", error:"#EF4444" }[tone];
+}
+
+function renderFinalResult() {
+  const total = state.scores.reduce((a,b)=>a+b,0);
+  const overall = getOverallBand(total);
+
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="hero-result">
+      <div class="hero-result-head">${ICONS.award}<span class="lbl">Overall Assessment</span></div>
+      <div class="hero-result-row">
+        <div>
+          <div class="overall-score">${total}<small> / 21</small></div>
+          <div class="overall-band tone-${overall.tone}" style="color:${getTextColor(overall.tone)}">${overall.label}</div>
+        </div>
+        <div class="overall-band-box tone-${overall.tone}" style="max-width:320px">
+          <div class="lbl-gray" style="opacity:.85">Band Range</div>
+          <div style="margin-top:6px; font-family:'Cabinet Grotesk',sans-serif; font-size:20px; font-weight:700">${overall.min}–${overall.max} marks</div>
+          <div style="margin-top:8px; font-size:14px; opacity:.9; line-height:1.6">Total assessment across all three rounds.</div>
+        </div>
+      </div>
+      <div class="overall-bar"><div style="width:${(total/21)*100}%; background:${getBarColor(overall.tone)}"></div></div>
+    </div>
+    <div class="final-grid">
+      ${LEVELS.map((level, i) => {
+        const sc = state.scores[i];
+        const b = getBand(level.bands, sc);
+        const pct = (sc / level.questions.length) * 100;
+        return `
+          <div class="final-card">
+            <div class="final-card-top">
+              <span class="lbl-gray">Level ${level.id}</span>
+              <span class="final-tag tone-${b.tone}" style="background:${getBgColor(b.tone)}; border-color:${getBorderColor(b.tone)}; color:${getTextColor(b.tone)}">${TAGS[b.tone]}</span>
+            </div>
+            <h3>${level.title}</h3>
+            <div class="score">${sc}<small> / ${level.questions.length}</small></div>
+            <div class="bar-track"><div style="width:${pct}%; background:${getBarColor(b.tone)}"></div></div>
+            <div class="band-text" style="color:${getTextColor(b.tone)}">${b.label}</div>
+          </div>
+        `;
+      }).join("")}
+    </div>
+    <div class="final-foot">
+      <p>Use this assessment as a personal compass. Strengthen weaker rounds before your next interview attempt.</p>
+      <button class="btn btn-secondary" id="restartBtn">${ICONS.restart} Restart Assessment</button>
+    </div>
+  `;
+  app.appendChild(wrap);
+  document.getElementById("restartBtn").addEventListener("click", () => {
+    state.stage = "landing"; state.levelIdx = 0; state.questionIdx = 0;
+    state.answers = LEVELS.map(l => Array(l.questions.length).fill(null));
+    state.scores = [0,0,0];
+    render();
+  });
+}
+
+function getTextColor(tone) { return { success:"#047857", info:"#1D4ED8", warning:"#92400E", error:"#B91C1C" }[tone]; }
+function getBgColor(tone) { return { success:"#ECFDF5", info:"#EFF6FF", warning:"#FFFBEB", error:"#FEF2F2" }[tone]; }
+function getBorderColor(tone) { return { success:"#A7F3D0", info:"#BFDBFE", warning:"#FDE68A", error:"#FECACA" }[tone]; }
+
+render();
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
